@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.16)
-project(REPLACE_WITH_YOUR_PROJECT_NAME)
+cmake_minimum_required(VERSION 3.5)
+project(Line_POP2)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -35,6 +35,15 @@ add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
+        src/main.cpp
+        src/main.cpp
+        src/main.cpp
+        src/main.cpp
+        src/main.cpp
+        src/main.cpp
+        src/main.cpp
+        include/StageObject.hpp
+        src/StageObject.cpp
 )
 
 if(MSVC)
