@@ -10,16 +10,16 @@ void App::Init() {
     m_Stage_Object.resize( 13 );
 
     m_BGM_Music.resize(1);
-    m_BGM_Music.at(0) = std::make_shared<Music>(GA_RESOURCE_DIR "/Music/springDayShadow.mp3");
+    m_BGM_Music.at(0) = std::make_shared<Music>(RESOURCE_DIR "/Music/springDayShadow.mp3");
     m_BGM_Music.at(0)->Pause();
     m_BGM_Music.at(0)->SetVolume(30);
 
-    m_Start_initial = std::make_shared<Character>(GA_RESOURCE_DIR "/Image/GameObject/initailStartButton.png");
+    m_Start_initial = std::make_shared<Character>(RESOURCE_DIR "/Image/GameObject/initailStartButton.png");
     m_Start_initial->SetPosition({0, -160.5f});
     m_Start_initial->SetZIndex(10);
     ADD(m_Start_initial);
 
-    m_Setting = std::make_shared<Character>(GA_RESOURCE_DIR "/Image/GameObject/setting.png");
+    m_Setting = std::make_shared<Character>(RESOURCE_DIR "/Image/GameObject/setting.png");
     m_Setting->SetPosition({0, -160.5f});
     m_Setting->SetZIndex(10);
     m_Setting->SetVisible( false );
@@ -40,7 +40,7 @@ void App::Init() {
         ADD(m_Stage_Buttoms.at(i));
     }
 
-    m_Jump_Page = std::make_shared<JumpPage>(GA_RESOURCE_DIR "/Image/Background/stage1Start.png");
+    m_Jump_Page = std::make_shared<JumpPage>(RESOURCE_DIR "/Image/Background/stage1Start.png");
     m_Jump_Page->SetVisible(false);
     m_Jump_Page->SetPosition({0, 0});
     m_Jump_Page->SetZIndex(12);
@@ -95,5 +95,5 @@ void App::Init() {
     m_Root.AddChildren(m_PRM->GetChildren());
 
     m_CurrentState = State::UPDATE;
-    m_BGM_Music.at(0)->Playing(GA_RESOURCE_DIR "/Music/aveMujica.mp3");
+    m_BGM_Music.at(0)->Playing(RESOURCE_DIR "/Music/aveMujica.mp3");
 }

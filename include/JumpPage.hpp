@@ -69,7 +69,7 @@ class JumpPage : public Character {
         void SettingPage() {
             AllDisappear();
             m_Cancel_Buttom->SetVisible( true );
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/setting.png" );
+            this->SetImage( RESOURCE_DIR"/Image/Background/setting.png" );
             this->SetVisible( true );
             m_BGM_Buttom->SetVisible( true );
             m_Cheat_Buttom->SetVisible( true );
@@ -80,7 +80,7 @@ class JumpPage : public Character {
         void InfoPage( int stage ) {
             m_Cancel_Buttom->SetVisible( true );
             std::string path = "stage" + std::to_string( stage ) + "Info.png";
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/" + path );
+            this->SetImage( RESOURCE_DIR"/Image/Background/" + path );
             this->SetVisible( true );
             SetStatus( JUMP_INFO );
         }
@@ -90,7 +90,7 @@ class JumpPage : public Character {
             m_Cancel_Buttom->SetVisible( true );
             m_info_Buttom->SetVisible( true );
             std::string path = "stage" + std::to_string( stage ) + "Start.png";
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/" + path );
+            this->SetImage( RESOURCE_DIR"/Image/Background/" + path );
             this->SetVisible( true );
             SetStatus( JUMP_PLAY );
         }
@@ -99,7 +99,7 @@ class JumpPage : public Character {
             AllDisappear();
             m_Cancel_Buttom->SetVisible( true );
             std::string path = "stage" + std::to_string( stage ) + "End.png";
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/" + path );
+            this->SetImage( RESOURCE_DIR"/Image/Background/" + path );
             SetStatus( JUMP_END );
             this->SetVisible( true );
         }
@@ -108,7 +108,7 @@ class JumpPage : public Character {
             AllDisappear();
             m_Cancel_Buttom->SetVisible( true );
             std::string path = "stage" + std::to_string( stage ) + "fail.png";
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/" + path );
+            this->SetImage( RESOURCE_DIR"/Image/Background/" + path );
             SetStatus( JUMP_END );
             this->SetVisible( true );
         }
@@ -117,7 +117,7 @@ class JumpPage : public Character {
             AllDisappear();
             m_Continue_Buttom->SetVisible( true );
             m_Stop_Buttom->SetVisible( true );
-            this->SetImage( GA_RESOURCE_DIR"/Image/Background/pausePage.png" );
+            this->SetImage( RESOURCE_DIR"/Image/Background/pausePage.png" );
             SetStatus( JUMP_PAUSE );
             this->SetVisible( true );
         }
@@ -163,6 +163,6 @@ private:
         bool BGM = true;
         bool cheat = false;
         inline std::string ImagePath(const std::string& phase) {
-            return (GA_RESOURCE_DIR "/Image/Background/" + phase );
+            return (RESOURCE_DIR "/Image/Background/" + phase );
         }
 };

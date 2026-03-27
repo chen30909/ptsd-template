@@ -50,13 +50,13 @@ bool PhaseStage(std::shared_ptr<StageObject> StageObject, int size, std::shared_
     for ( int i = 0 ; i < 3 ; ++i ) {
         if ( Tools.at(i)->ifClickInUse() ) {
             if ( i == 1 ) {
-                Tools.at(i)->SetImage( GA_RESOURCE_DIR"/Image/GameObject/item2Click.png" );
+                Tools.at(i)->SetImage( RESOURCE_DIR"/Image/GameObject/item2Click.png" );
             }
             else if ( i == 2 ) {
-                Tools.at(i)->SetImage( GA_RESOURCE_DIR"/Image/GameObject/item3Click.png" );
+                Tools.at(i)->SetImage( RESOURCE_DIR"/Image/GameObject/item3Click.png" );
             }
             else if ( i == 0 ) {
-                Tools.at(i)->SetImage( GA_RESOURCE_DIR"/Image/GameObject/item1Click.png");
+                Tools.at(i)->SetImage( RESOURCE_DIR"/Image/GameObject/item1Click.png");
             }
             Tools.at(i)->SetClick();
             currentPhase = PHASE_ITEM_USED;

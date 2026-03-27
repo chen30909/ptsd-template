@@ -21,31 +21,31 @@ void StageObject::RandomChangeObject( int current_pos ) {
     switch ( ramdom_number )
     {
         case BLUE_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/blueNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/blueNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( BLUE_OBJECT );
             break;
         case BROWN_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/brownNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/brownNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( BROWN_OBJECT );
             break;
         case GREEN_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/greenNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/greenNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( GREEN_OBJECT );
             break;
         case PINK_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/pinkNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/pinkNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( PINK_OBJECT );
             break;
         case ORANGE_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/orangeNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/orangeNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( ORANGE_OBJECT );
             break;
         case WHITE_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/whiteNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/whiteNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( WHITE_OBJECT );
             break;
         case YELLOW_OBJECT:
-            m_Stage_Object[current_pos]->SetImage( GA_RESOURCE_DIR"/Image/GameObject/yellowNormal.png" );
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/yellowNormal.png" );
             m_Stage_Object[current_pos]->SetBlock( YELLOW_OBJECT );
             break;
         default:

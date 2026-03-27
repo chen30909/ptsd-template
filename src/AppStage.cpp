@@ -109,7 +109,7 @@ void App::SetUpStage(int stage) {
     // m_Stage_Object.at(stage)->ClearObject();
     m_Setting->SetVisible(false);
     if ( m_Jump_Page->ifBGM() )
-        m_BGM_Music.at(0)->Playing(GA_RESOURCE_DIR "/Music/rickRoll.mp3");
+        m_BGM_Music.at(0)->Playing(RESOURCE_DIR "/Music/rickRoll.mp3");
     int size = 0;
     if (stage == 1) size = 37;
     else if (stage == 2) size = 45;
@@ -127,7 +127,7 @@ void App::SetUpStage(int stage) {
     if (m_Stage_Object.size() <= static_cast<size_t>(stage)) m_Stage_Object.resize(stage + 1);
     m_Stage_Object.at(stage) = std::make_shared<StageObject>(size);
     m_Stage_Object.at(stage)->SetStage(0);
-    auto clickObj = std::make_shared<GameCharacter>(GA_RESOURCE_DIR "/Image/GameObject/click.png");
+    auto clickObj = std::make_shared<GameCharacter>(RESOURCE_DIR "/Image/GameObject/click.png");
     clickObj->SetVisible(false);
     clickObj->SetZIndex(9);
     m_Stage_Object[stage]->PushBackObject(clickObj);

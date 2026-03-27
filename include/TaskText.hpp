@@ -9,7 +9,7 @@
 class TaskText : public Util::GameObject {
 public:
     TaskText() : GameObject(
-            std::make_unique<Util::Text>(GA_RESOURCE_DIR "/Font/Inkfree.ttf", 15,
+            std::make_unique<Util::Text>(RESOURCE_DIR "/Font/Inkfree.ttf", 15,
                                          append_string_views("0", ""),
                                          Util::Color::FromName(Util::Colors::BLUE)),
             100) {

@@ -49,7 +49,7 @@ public:
 
     void AppearHomePage() {
         if ( m_Jump_Page->ifBGM() )
-            m_BGM_Music.at(0)->Playing(GA_RESOURCE_DIR "/Music/springDayShadow.mp3");
+            m_BGM_Music.at(0)->Playing(RESOURCE_DIR "/Music/springDayShadow.mp3");
 
         m_Text_Point->SetVisible(false);
         m_Setting->SetVisible( true );

@@ -12,7 +12,7 @@
 class BackgroundImage : public Util::GameObject {
 public:
     BackgroundImage() : GameObject(
-        std::make_unique<Util::Image>(GA_RESOURCE_DIR "/Image/Background/initialImage.png"), -1) {
+        std::make_unique<Util::Image>(RESOURCE_DIR "/Image/Background/initialImage.png"), -1) {
         SetZIndex( 3 );
         SetPivot(glm::vec2(0.1f, 0.5f)); 
     }
@@ -65,7 +65,7 @@ private:
         return transform;
     }
     inline std::string ImagePath(const std::string& phase) {
-        return (GA_RESOURCE_DIR "/Image/Background/" + phase );
+        return (RESOURCE_DIR "/Image/Background/" + phase );
     }
 };
 
