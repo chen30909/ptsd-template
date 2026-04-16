@@ -81,9 +81,9 @@ public:
     
         glm::vec2 pos = GetPosition();
         // std::cout << pos.x << " " << pos.y << std::endl;
-        glm::vec2 size = this -> m_Size; 
-        bool insideX = (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x );
-        bool insideY = (mousePos.y >= pos.y && mousePos.y <= pos.y + size.y );
+        glm::vec2 size = this -> m_Size;
+        bool insideX = (mousePos.x >= pos.x - size.x / 2.0f && mousePos.x <= pos.x + size.x / 2.0f);
+        bool insideY = (mousePos.y >= pos.y - size.y / 2.0f && mousePos.y <= pos.y + size.y / 2.0f);
         bool isClicked = Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB);
 
         return insideX && insideY && isClicked;
