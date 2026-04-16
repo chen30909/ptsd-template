@@ -1,9 +1,40 @@
 set(SRC_FILES
     App.cpp
+    AppInit.cpp
+    AppStage.cpp
+    Character.cpp
+    DebugMode.cpp
+    GameCharacter.cpp
+    Global.cpp
+    JumpPage.cpp
+    main.cpp
+    PhaseMainAction.cpp
+    PhaseResourceManager.cpp
+    StageObject.cpp
+    StageObjectCheck.cpp
+    StageObjectDisappear.cpp
+    StageObjectInit.cpp
+    StageObjectItemUsed.cpp
+    StageObjectMakeDisappear.cpp
+    StageObjectShuffle.cpp
+    StageObjectUpdate.cpp
+    StageConfig.cpp
 )
 
 set(INCLUDE_FILES
     App.hpp
+    BackgroundImage.hpp
+    Character.hpp
+    GameCharacter.hpp
+    Global.hpp
+    ImageCache.hpp
+    Item.hpp
+    JumpPage.hpp
+    ObjectInformation.hpp
+    PhaseResourceManager.hpp
+    StageObject.hpp
+    StageConfig.hpp
+    TaskText.hpp
 )
 
 set(TEST_FILES

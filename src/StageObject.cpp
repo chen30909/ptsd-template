@@ -1,37 +1,59 @@
 #include "StageObject.hpp"
+#include "App.hpp"
+#include "Global.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <random>
+#include <thread>
+#include <vector>
+#include <chrono>
+using namespace std;
 
-StageObject::StageObject() = default;
+void StageObject::RandomChangeObject( int current_pos ) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distrib(1, 7);
 
-void StageObject::InitStage1() {
-    m_Slots.clear();
+    int ramdom_number = distrib(gen);
 
-    // 先依你圖片的六角盤做近似中心點
-    // 座標原點以畫面中心為 0,0
-    // 你之後只要微調這些數字，就能完全對齊圖片
-
-    const std::vector<std::vector<glm::vec2>> rows = {
-        { {-96, 150}, {-32, 150}, { 32, 150}, { 96, 150} },
-        { {-128,  94}, {-64,  94}, {  0,  94}, { 64,  94}, {128,  94} },
-        { {-160,  38}, {-96,  38}, {-32,  38}, { 32,  38}, { 96,  38}, {160,  38} },
-        { {-160, -18}, {-96, -18}, {-32, -18}, { 32, -18}, { 96, -18}, {160, -18} },
-        { {-160, -74}, {-96, -74}, {-32, -74}, { 32, -74}, { 96, -74}, {160, -74} },
-        { {-128,-130}, {-64,-130}, {  0,-130}, { 64,-130}, {128,-130} },
-        { {-96,-186}, {-32,-186}, { 32,-186}, { 96,-186} },
-        { {  0,-242} }
-    };
-
-    int id = 0;
-    for (const auto& row : rows) {
-        for (const auto& pos : row) {
-            Slot slot;
-            slot.id = id++;
-            slot.position = pos;
-            slot.radius = 28.0f;
-            m_Slots.push_back(slot);
-        }
+    switch ( ramdom_number )
+    {
+        case BLUE_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/blueNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( BLUE_OBJECT );
+            break;
+        case BROWN_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/brownNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( BROWN_OBJECT );
+            break;
+        case GREEN_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/greenNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( GREEN_OBJECT );
+            break;
+        case PINK_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/pinkNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( PINK_OBJECT );
+            break;
+        case ORANGE_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/orangeNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( ORANGE_OBJECT );
+            break;
+        case WHITE_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/whiteNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( WHITE_OBJECT );
+            break;
+        case YELLOW_OBJECT:
+            m_Stage_Object[current_pos]->SetImage( RESOURCE_DIR"/Image/GameObject/yellowNormal.png" );
+            m_Stage_Object[current_pos]->SetBlock( YELLOW_OBJECT );
+            break;
+        default:
+            break;
     }
 }
 
-const std::vector<StageObject::Slot>& StageObject::GetSlots() const {
-    return m_Slots;
+bool StageObject::IsSameColor(int blockType1, int blockType2) {
+    return ((blockType1 % 10) == (blockType2 % 10) 
+    && blockType1 != NO_COLOR && blockType2 != NO_COLOR);
 }

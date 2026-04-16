@@ -1,24 +1,45 @@
-# PTSD Template
+# Abstract
 
-This is a [PTSD](https://github.com/ntut-open-source-club/practical-tools-for-simple-design) framework template for students taking OOPL2024s.
+遊戲名稱：Line Pop2
 
-## Quick Start
+組員：
 
-1. Use this template to create a new repository
-   ![github screenshot](https://github.com/ntut-rick/ptsd-template/assets/126899559/ef62242f-03ed-481d-b858-12b730c09beb)
+- 112820045曾怡瑄
+- 111820017陳嘉祥
 
-2. Clone your repository
+# Game Introduction
 
-   ```bash
-   git clone YOUR_GIT_URL --recursive
-   ```
+Line Pop 是一款 2D 益智類型的三消遊戲。玩家需要在遊戲畫面中的格子地圖上，透過交換相鄰的方塊來形成三個或以上相同圖案的連線。當成功連線後，這些方塊會被消除並獲得分數，上方的方塊會掉落填補空位，並隨機生成新的方塊。
 
-3. Build your project
+遊戲的主要目標是在有限的時間或步數內取得更高的分數。玩家需要觀察整體盤面並思考最佳的交換位置，以形成連鎖消除並獲得更高的分數。
 
-  > [!WARNING]
-  > Please build your project in `Debug` because our `Release` path is broken D:
-   
-   ```sh
-   cmake -DCMAKE_BUILD_TYPE=Debug -B build # -G Ninja
-   ```
-   better read [PTSD README](https://github.com/ntut-open-source-club/practical-tools-for-simple-design)
+在遊戲過程中，當玩家成功消除方塊時，系統會觸發掉落與補充機制，若新的方塊再次形成連線，則會產生連鎖消除效果。這種連鎖機制能讓玩家獲得更高的分數並增加遊戲的趣味性。
+
+本遊戲主要強調玩家的 觀察能力、策略思考以及反應速度，並透過簡單直觀的操作方式讓玩家能快速上手。
+
+[遊戲連結](https://www.youtube.com/shorts/Md7_55kEazI)
+
+# Current Status
+
+目前版本使用 PTSD 框架完成 Line Pop2 的第一關 Demo。
+
+已完成：
+
+- [x] 建立開始畫面與首頁
+- [x] 在首頁放入第 1-10 關入口
+- [x] 建立第一關棋盤資料
+- [x] 隨機產生方塊
+- [x] 滑鼠點擊選取方塊
+- [x] 相鄰方塊交換
+- [x] 三個以上相同方塊消除
+- [x] 分數、步數與目標顯示
+- [x] 方塊掉落與補新方塊
+- [x] 第一關通關與失敗畫面
+- [x] 暫停、繼續、停止按鈕
+- [x] 第 2-10 關可進入空地圖作為 placeholder
+
+尚未完成：
+
+- [ ] 第 2-10 關的實際棋盤與任務
+- [ ] 更完整的音效與動畫
+- [ ] 更多特殊任務與關卡平衡
