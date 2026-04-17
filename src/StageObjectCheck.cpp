@@ -62,7 +62,6 @@ void StageObject::CheckClickSwitch( int check , int i , std::shared_ptr<TaskText
             }
 
             //all check but no disappear
-            printf( "asdasda\n");
             if ( !CheckAppearance( 1 , m_Stage , false ) ) {
                 m_Stage_Object[i]->SwitchPosition( m_Stage_Object[check] );
                 std::shared_ptr<GameCharacter> NewObject = m_Stage_Object[check];
@@ -219,8 +218,6 @@ bool StageObject::CheckAppearance(int s, int now_stage, bool ifShuffle) {
             }
             else 
                 currentPhase = PHASE_SHUFFLE;
-        } else {
-            std::cout << "Swap between " << result.first << " and " << result.second << std::endl;
         }
     }
 

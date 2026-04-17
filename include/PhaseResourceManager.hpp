@@ -15,6 +15,7 @@ public:
     }
 
     void NextPhase(int Phase);
+    void NextStage(int stage);
 
     int ReturnPhase() { return m_Phase; }
 

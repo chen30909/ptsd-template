@@ -9,18 +9,8 @@
 
 #define PHASE_INITIAL_IMAGE 1
 #define PHASE_HOME_PAGE 2
-#define PHASE_STAGE_1 3
-#define PHASE_STAGE_2 4
-#define PHASE_STAGE_3 5
-#define PHASE_STAGE_4 6
-#define PHASE_STAGE_5 7
-#define PHASE_STAGE_6 8
-#define PHASE_STAGE_7 9
-#define PHASE_STAGE_8 10
-#define PHASE_STAGE_9 11
-#define PHASE_STAGE_10 12
-//#define PHASE_STAGE_11 13
-//#define PHASE_STAGE_12 14
+#define PHASE_STAGE 3
+
 
 #define JUMP_NORMAL 0
 #define JUMP_PLAY 1
@@ -146,8 +136,6 @@
 #define LEVEL_EIGHT_IMAGE RESOURCE_DIR"/Image/GameObject/levelEight.png"
 #define LEVEL_NINE_IMAGE RESOURCE_DIR"/Image/GameObject/levelNine.png"
 #define LEVEL_TEN_IMAGE RESOURCE_DIR"/Image/GameObject/levelTen.png"
-#define LEVEL_ELEVEN_IMAGE RESOURCE_DIR"/Image/GameObject/levelEleven.png"
-#define LEVEL_TWELVE_IMAGE RESOURCE_DIR"/Image/GameObject/levelTwelve.png"
 
 #define LEVEL_ONE_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearOne.png"
 #define LEVEL_TWO_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearTwo.png"
@@ -159,8 +147,6 @@
 #define LEVEL_EIGHT_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearEight.png"
 #define LEVEL_NINE_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearNine.png"
 #define LEVEL_TEN_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearTen.png"
-#define LEVEL_ELEVEN_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearEleven.png"
-#define LEVEL_TWELVE_CLEAR RESOURCE_DIR"/Image/GameObject/levelClearTwelve.png"
 
 #define LEVEL_ONE_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentOne.png"
 #define LEVEL_TWO_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentTwo.png"
@@ -172,8 +158,6 @@
 #define LEVEL_EIGHT_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentEight.png"
 #define LEVEL_NINE_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentNine.png"
 #define LEVEL_TEN_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentTen.png"
-#define LEVEL_ELEVEN_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentEleven.png"
-#define LEVEL_TWELVE_CURRENT RESOURCE_DIR"/Image/GameObject/levelCurrentTwelve.png"
 
 #include <glm/vec2.hpp> 
 #include <stack>
@@ -189,47 +173,6 @@ extern glm::vec2 stage_goal_position[13];
 extern glm::vec2 stage1_position[38];
 extern int stage1_neibor[38][6];
 extern Objectinformation stage1[38];
-
-extern glm::vec2 stage2_position[46];
-extern int stage2_neibor[46][6];
-extern Objectinformation stage2[46];
-
-extern glm::vec2 stage3_position[48];
-extern int stage3_neibor[48][6];
-extern Objectinformation stage3[48];
-
-extern glm::vec2 stage4_position[65];
-extern int stage4_neibor[65][6];
-extern Objectinformation stage4[65];
-
-extern glm::vec2 stage5_position[40];
-extern int stage5_neibor[40][6];
-extern Objectinformation stage5[40];
-
-extern glm::vec2 stage6_position[73];
-extern int stage6_neibor[73][6];
-extern Objectinformation stage6[73];
-
-extern glm::vec2 stage7_position[61];
-extern int stage7_neibor[61][6];
-extern Objectinformation stage7[61];
-
-extern glm::vec2 stage8_position[71];
-extern int stage8_neibor[71][6];
-extern Objectinformation stage8[71];
-
-extern glm::vec2 stage9_position[44];
-extern int stage9_neibor[44][6];
-extern Objectinformation stage9[44];
-
-extern glm::vec2 stage10_position[74];
-extern int stage10_neibor[74][6];
-extern Objectinformation stage10[74];
-extern std::set<int> one_layer_7;
-extern std::set<int> two_layer_7;
-
-extern std::set<int> one_layer_10;
-extern std::set<int> two_layer_11;
 
 extern std::string ClearStageList[13];
 extern std::string LevelStageList[13];
@@ -249,17 +192,6 @@ extern int stage_moves[13];
 extern bool ifClear[13];
 
 void InitializeStage1();
-void InitializeStage2();
-void InitializeStage3();
-void InitializeStage4();
-void InitializeStage5();
-void InitializeStage6();
-void InitializeStage7();
-void InitializeStage8();
-void InitializeStage9();
-void InitializeStage10();
-void InitializeStage11();
-void InitializeStage12();
 void InitializeStages();
 
 

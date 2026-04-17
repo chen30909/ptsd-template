@@ -36,11 +36,9 @@ void App::Update() {
                 if ( m_Jump_Page->GetStatus() == JUMP_SETTING && m_Jump_Page->ifClickWithBGM() ) {
                     if ( m_Jump_Page->ifBGM() ) {
                         m_Jump_Page->GetBGMButtom()->SetImage( OFF_IMAGE );
-                        m_BGM_Music.at(0)->SetVolume(0);
                         m_Jump_Page->SetBGM(false);
                     } else {
                         m_Jump_Page->GetBGMButtom()->SetImage( ON_IMAGE );
-                        m_BGM_Music.at(0)->SetVolume(30);
                         m_Jump_Page->SetBGM(true);
                     }
                 }
@@ -84,50 +82,14 @@ void App::Update() {
             }
             break;
 
-        case Phase::STAGE_1:
-            Stage( 1 );
+        case Phase::STAGE:
+            Stage( m_stage_pos );
             break;
 
-        case Phase::STAGE_2:
-            Stage( 2 );
-            break;
 
-        case Phase::STAGE_3:
-            Stage( 3 );
-            break;
-
-        case Phase::STAGE_4:
-            Stage( 4 );
-            break;
-
-        case Phase::STAGE_5:
-            Stage( 5 );
-            break;
-
-        case Phase::STAGE_6:
-            Stage( 6 );
-            break;
-        
-        case Phase::STAGE_7:
-            Stage( 7 );
-            break;
-        
-        case Phase::STAGE_8:
-            Stage( 8 );
-            break;
-
-        case Phase::STAGE_9:
-            Stage( 9 );
-            break;
-        case Phase::STAGE_10:
-            Stage( 10 );
-            break;
         }
 
-        /*
-        * Do not touch the code below as they serve the purpose for
-        * closing the window.
-        */
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
         m_CurrentState = State::END;

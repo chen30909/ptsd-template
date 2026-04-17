@@ -73,7 +73,6 @@ class JumpPage : public Character {
             this->SetVisible( true );
             m_BGM_Buttom->SetVisible( true );
             m_Cheat_Buttom->SetVisible( true );
-            printf( "%d\n" , m_BGM_Buttom->GetVisibility() );
             SetStatus( JUMP_SETTING );
         }
 

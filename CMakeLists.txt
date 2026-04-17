@@ -29,26 +29,8 @@ list(TRANSFORM INCLUDE_FILES PREPEND "${INCLUDE_DIR}/")
 # file(GLOB_RECURSE HEADER_FILES include/*)
 
 add_executable(${PROJECT_NAME}
-    ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/Character.cpp
-    ${SRC_DIR}/DebugMode.cpp
-    ${SRC_DIR}/GameCharacter.cpp
-    ${SRC_DIR}/Global.cpp
-    ${SRC_DIR}/PhaseMainAction.cpp
-    ${SRC_DIR}/PhaseResourceManager.cpp
-    ${SRC_DIR}/StageObject.cpp
-    ${SRC_DIR}/JumpPage.cpp
-    ${SRC_DIR}/AppStage.cpp
-    ${SRC_DIR}/AppInit.cpp
-    ${SRC_DIR}/StageObjectInit.cpp
-    ${SRC_DIR}/StageObjectCheck.cpp
-    ${SRC_DIR}/StageObjectDisappear.cpp
-    ${SRC_DIR}/StageObjectItemUsed.cpp
-    ${SRC_DIR}/StageObjectMakeDisappear.cpp
-    ${SRC_DIR}/StageObjectShuffle.cpp
-    ${SRC_DIR}/StageObjectUpdate.cpp
     ${SRC_FILES}
-    ${HEADER_FILES}
+    ${INCLUDE_FILES}
 )
 
 if(MSVC)

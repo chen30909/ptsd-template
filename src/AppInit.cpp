@@ -1,6 +1,7 @@
 #include "pch.hpp"
 #include "App.hpp"
 #include "Global.hpp"
+#include "StageConfig.hpp"
 
 
 void App::Init() {
@@ -8,11 +9,6 @@ void App::Init() {
 
     startTime = std::chrono::steady_clock::now();
     m_Stage_Object.resize( 13 );
-
-    m_BGM_Music.resize(1);
-    m_BGM_Music.at(0) = std::make_shared<Music>(RESOURCE_DIR "/Music/springDayShadow.mp3");
-    m_BGM_Music.at(0)->Pause();
-    m_BGM_Music.at(0)->SetVolume(30);
 
     m_Start_initial = std::make_shared<Character>(RESOURCE_DIR "/Image/GameObject/initailStartButton.png");
     m_Start_initial->SetPosition({0, -160.5f});
@@ -29,9 +25,9 @@ void App::Init() {
     const std::vector<std::string> levelImages = {
         "", LEVEL_ONE_IMAGE, LEVEL_TWO_IMAGE, LEVEL_THREE_IMAGE, LEVEL_FOUR_IMAGE,
         LEVEL_FIVE_IMAGE, LEVEL_SIX_IMAGE, LEVEL_SEVEN_IMAGE, LEVEL_EIGHT_IMAGE,
-        LEVEL_NINE_IMAGE, LEVEL_TEN_IMAGE,// LEVEL_ELEVEN_IMAGE, LEVEL_TWELVE_IMAGE
+        LEVEL_NINE_IMAGE, LEVEL_TEN_IMAGE
     };
-    for (int i = 1; i < 11; ++i)
+    for (int i = 1; i <= GetPlayableStageCount(); ++i)
     {
         m_Stage_Buttoms.at(i) = std::make_shared<Character>(levelImages.at(i));
         m_Stage_Buttoms.at(i)->SetPosition(stage_position[i]);
@@ -95,5 +91,4 @@ void App::Init() {
     m_Root.AddChildren(m_PRM->GetChildren());
 
     m_CurrentState = State::UPDATE;
-    m_BGM_Music.at(0)->Playing(RESOURCE_DIR "/Music/aveMujica.mp3");
 }

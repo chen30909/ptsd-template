@@ -1,5 +1,6 @@
 #include "App.hpp"
 #include "Global.hpp"
+#include "StageConfig.hpp"
 
 #include <thread>
 
@@ -8,7 +9,6 @@
 bool PhaseInitialImage(std::shared_ptr<Character>& chara_obj) {
     if (chara_obj->GetVisibility()) {
         if (chara_obj->IfClick()) {
-            std::cout << "Character clicked!" << std::endl;
             chara_obj->SetVisible(false);
             return true;
         }
@@ -17,7 +17,7 @@ bool PhaseInitialImage(std::shared_ptr<Character>& chara_obj) {
 }
 
 int PhaseHomePage(const std::vector<std::shared_ptr<Character>>& buttoms) {
-    for (int i = 1; i < 11; ++i)
+    for (int i = 1; i <= GetPlayableStageCount(); ++i)
         {
         if (buttoms.at(i)->IfClick() && ifClear[i - 1])
             return i;
@@ -76,14 +76,12 @@ bool PhaseStage(std::shared_ptr<StageObject> StageObject, int size, std::shared_
                 objectArray.at(0)->SetPosition(objectArray.at(i)->GetInformationPosition());
                 objectArray.at(0)->SetVisible(true);
                 is_click = i;
-                // printf("Click on object %d\n", i);
             } else {
                 objectArray.at(0)->SetVisible(false);
                 if (is_click == i) {
                     is_click = 0;
                     break;
                 }
-                // printf("Click on object2 %d\n", i);
                 int check = is_click;
                 StageObject->CheckClickSwitch(check, i, point);
                 is_click = 0;
