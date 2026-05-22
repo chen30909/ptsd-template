@@ -77,6 +77,8 @@ public:
     void AppearAll();
     void DisAppearAll();
     void ClearAllClick();
+    void UpdateAnimations(float deltaTime);
+    bool HasActiveAnimations() const;
 
     bool IsSameColor(int blockType1, int blockType2);
     

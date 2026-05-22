@@ -11,6 +11,7 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Animation.hpp"
+#include <chrono>
 
 class GameCharacter : public Character {
 public:
@@ -85,13 +86,8 @@ public:
         Objectinformation temp = this->m_information;
         this->m_information = other->m_information;
         other->m_information = temp;
-
-        
-        this->SetPosition( this->GetInformationPosition() );
-        other->SetPosition( other->GetInformationPosition() );
-
-
-        temp.~Objectinformation();
+        this->BeginMoveToInformationPosition();
+        other->BeginMoveToInformationPosition();
 
     }
 
@@ -114,7 +110,54 @@ public:
     }
     virtual void SetPosition(const glm::vec2& Position) { 
         m_Transform.translation = Position; 
+        m_TargetPosition = Position;
+        m_IsAnimating = false;
+        m_Transform.scale = {1.0f, 1.0f};
         (this->m_information).SetPosition( Position );
+    }
+
+    void BeginMoveToInformationPosition() {
+        m_TargetPosition = this->GetInformationPosition();
+        m_IsAnimating = true;
+    }
+
+    void SnapToInformationPosition() {
+        m_Transform.translation = this->GetInformationPosition();
+        m_TargetPosition = m_Transform.translation;
+        m_IsAnimating = false;
+        m_Transform.scale = {1.0f, 1.0f};
+    }
+
+    void UpdateMotion(float deltaTime) {
+        const glm::vec2 neutralScale = {1.0f, 1.0f};
+        if (!m_IsAnimating) {
+            m_Transform.scale = glm::mix(m_Transform.scale, neutralScale, glm::clamp(deltaTime * 14.0f, 0.0f, 1.0f));
+            return;
+        }
+
+        glm::vec2 delta = m_TargetPosition - m_Transform.translation;
+        const float distance = glm::length(delta);
+        if (distance < 0.75f) {
+            m_Transform.translation = m_TargetPosition;
+            m_Transform.scale = neutralScale;
+            m_IsAnimating = false;
+            return;
+        }
+
+        const float blend = 1.0f - std::exp(-m_MoveResponsiveness * deltaTime);
+        m_Transform.translation = glm::mix(m_Transform.translation, m_TargetPosition, glm::clamp(blend, 0.0f, 1.0f));
+
+        delta = m_TargetPosition - m_Transform.translation;
+        const float stretch = glm::clamp(glm::length(delta) / 60.0f, 0.0f, 1.0f) * 0.08f;
+        if (std::abs(delta.x) > std::abs(delta.y)) {
+            m_Transform.scale = {1.0f + stretch, 1.0f - stretch};
+        } else {
+            m_Transform.scale = {1.0f - stretch, 1.0f + stretch};
+        }
+    }
+
+    bool IsAnimating() const {
+        return m_IsAnimating;
     }
 
     void SetBlock(int block_color) {
@@ -160,6 +203,9 @@ protected:
     int m_BlockType = 0;
     int m_CurrentType = 0;
     bool m_Generate = false;
+    glm::vec2 m_TargetPosition = {0.0f, 0.0f};
+    bool m_IsAnimating = false;
+    float m_MoveResponsiveness = 18.0f;
 };
 
 #endif // GAME_CHARACTER_HPP

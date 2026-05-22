@@ -107,6 +107,9 @@ class JumpPage : public Character {
             AllDisappear();
             m_Cancel_Buttom->SetVisible( true );
             std::string path = "stage" + std::to_string( stage ) + "fail.png";
+            if (stage == 2 || stage == 5 || stage == 9) {
+                path = "stage" + std::to_string(stage) + "Fail.png";
+            }
             this->SetImage( RESOURCE_DIR"/Image/Background/" + path );
             SetStatus( JUMP_END );
             this->SetVisible( true );

@@ -22,15 +22,11 @@ void App::Init() {
     ADD(m_Setting);
 
     m_Stage_Buttoms.resize(13);
-    const std::vector<std::string> levelImages = {
-        "", LEVEL_ONE_IMAGE, LEVEL_TWO_IMAGE, LEVEL_THREE_IMAGE, LEVEL_FOUR_IMAGE,
-        LEVEL_FIVE_IMAGE, LEVEL_SIX_IMAGE, LEVEL_SEVEN_IMAGE, LEVEL_EIGHT_IMAGE,
-        LEVEL_NINE_IMAGE, LEVEL_TEN_IMAGE
-    };
     for (int i = 1; i <= GetPlayableStageCount(); ++i)
     {
-        m_Stage_Buttoms.at(i) = std::make_shared<Character>(levelImages.at(i));
-        m_Stage_Buttoms.at(i)->SetPosition(stage_position[i]);
+        const auto& config = GetStageConfig(i);
+        m_Stage_Buttoms.at(i) = std::make_shared<Character>(config.stageButtonImage);
+        m_Stage_Buttoms.at(i)->SetPosition(config.mapPosition);
         m_Stage_Buttoms.at(i)->SetZIndex(10);
         m_Stage_Buttoms.at(i)->SetVisible(false);
         ADD(m_Stage_Buttoms.at(i));

@@ -4,6 +4,7 @@
 #include "Util/GameObject.hpp"
 #include "Util/Text.hpp"
 #include "Util/Color.hpp"
+#include "StageConfig.hpp"
 #include <string>
 
 class TaskText : public Util::GameObject {
@@ -17,12 +18,13 @@ public:
     }
 
     void Initial( int stage ) {
-        stage_goal_counter[stage] = stage_point_goal[stage];
+        const auto& config = GetStageConfig(stage);
+        stage_goal_counter[stage] = config.goalValue;
         this->m_Point = 0;
-        this->m_Movement = stage_moves[stage];
-        this->m_Goal = stage_point_goal[stage];
-        this->m_goal_des = stage_goal_type[stage];
-        this->SetPosition( point_position[stage] );
+        this->m_Movement = config.moveLimit;
+        this->m_Goal = config.goalValue;
+        this->m_goal_des = config.goalDescription;
+        this->SetPosition( config.hudPosition );
         this->UpdateText();
     }
     bool GetVisibility() const { return m_Visible; }

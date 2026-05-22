@@ -7,9 +7,19 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
+namespace {
+constexpr auto kShuffleDelay = std::chrono::milliseconds(600);
+constexpr auto kDisappearDelay = std::chrono::milliseconds(180);
+constexpr auto kDropDelay = std::chrono::milliseconds(140);
+
+bool WaitForDuration(std::chrono::steady_clock::duration duration) {
+    return (std::chrono::steady_clock::now() - startTime) >= duration;
+}
+}
+
 void App::WaitForShuffle(int stage_pos) {
     m_Show_Text->SetVisible(true);
-    if (WAIT_FOR_SECOND(3)) {
+    if (WaitForDuration(kShuffleDelay)) {
         m_Stage_Object[stage_pos]->ShuffleStageCharacter(stage_pos);
         m_Show_Text->SetVisible(false);
         currentPhase = PHASE_NORMAL;
@@ -19,7 +29,7 @@ void App::WaitForShuffle(int stage_pos) {
 }
 
 void App::WaitBeforeDisappear(int stage_pos) {
-    if (WAIT_FOR_SECOND(1)) {
+    if (WaitForDuration(kDisappearDelay)) {
         currentPhase = PHASE_NORMAL;
         m_Stage_Object[stage_pos]->MakeDisappear();
     }
@@ -27,7 +37,7 @@ void App::WaitBeforeDisappear(int stage_pos) {
 }
 
 void App::WaitForDisappearPause() {
-    if (WAIT_FOR_SECOND(1)) {
+    if (WaitForDuration(kDropDelay)) {
         currentPhase = PHASE_DROPPING;
     }
     m_Root.Update();
@@ -36,9 +46,7 @@ void App::WaitForDisappearPause() {
 void App::WaitForDrop(int stage_pos) {
     m_Stage_Object[stage_pos]->Dropping(stage_pos, stage_pos, false);
     m_Text_Point->SetPoint(stage_point_counter[stage_pos]);
-    if (stage_pos != 3 && stage_pos != 4) {
-        m_Text_Point->SetGoal(stage_goal_counter[stage_pos]);
-    }
+    m_Text_Point->SetGoal(stage_goal_counter[stage_pos]);
     m_Text_Point->UpdateText();
 }
 
@@ -102,6 +110,14 @@ void App::UseSelectedItem(int stage_pos) {
             m_Stage_Object.at(stage_pos)->UseMagicGlove(m_Tools.at(GLOVES));
         }
     }
+
+    bool anyToolSelected = false;
+    for (int tool_idx = 0; tool_idx < 3; ++tool_idx) {
+        anyToolSelected = anyToolSelected || m_Tools.at(tool_idx)->Click();
+    }
+    if (!anyToolSelected && currentPhase == PHASE_ITEM_USED) {
+        currentPhase = PHASE_NORMAL;
+    }
 }
 
 void App::SetUpStage(int stage) {
@@ -132,7 +148,7 @@ void App::SetUpStage(int stage) {
     ADD(m_Stage_Object.at(stage));
     
     auto stage_goal = std::make_shared<GameCharacter>(config.goalImage);
-    stage_goal->SetPosition(stage_goal_position[stage]);
+    stage_goal->SetPosition(config.goalPosition);
     stage_goal->SetVisible(config.hasBoard);
     stage_goal->SetZIndex( 10 );
     ADD(stage_goal);
@@ -164,7 +180,12 @@ void App::SetUpPlayStage(int m_stage_pos) {
     m_Show_Text->SetPosition({0, 250});
     m_Jump_Page->AllDisappear();
 
+    for (int i = 0; i < 3; ++i) {
+        m_Tools.at(i)->Appear();
+    }
+
     currentPhase = PHASE_NORMAL;
+    m_LastFrameTime = std::chrono::steady_clock::now();
     m_PRM->NextStage(m_stage_pos);
     m_Phase = Phase::STAGE;
 }
@@ -180,6 +201,13 @@ void App::RemoveStage(int stage) {
 }
 
 void App::Stage( int stage_pos ) {
+    const auto now = std::chrono::steady_clock::now();
+    const float deltaTime = std::chrono::duration<float>(now - m_LastFrameTime).count();
+    m_LastFrameTime = now;
+    if (stage_pos > 0 && static_cast<size_t>(stage_pos) < m_Stage_Object.size() && m_Stage_Object[stage_pos]) {
+        m_Stage_Object[stage_pos]->UpdateAnimations(deltaTime);
+    }
+
     m_Jump_Page->GetPauseButtom()->SetVisible( true );
     if (!HasStageBoard(stage_pos)) {
         if ( m_Jump_Page->ifClickWithPauseButtom() ) m_Jump_Page->PausePage();

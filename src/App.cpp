@@ -6,6 +6,18 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
+namespace {
+void ApplyCheatMode(const std::vector<std::shared_ptr<Item>>& tools, bool enabled) {
+    const int count = enabled ? 99 : 6;
+    for (int i = 0; i < 3; ++i) {
+        item_num[i] = count;
+        if (tools.at(i)) {
+            tools.at(i)->SetCount(count);
+        }
+    }
+}
+}
+
 void App::Start() {
     LOG_TRACE("Start");
     Init();
@@ -42,21 +54,18 @@ void App::Update() {
                         m_Jump_Page->SetBGM(true);
                     }
                 }
-                if ( m_Jump_Page->GetStatus() == JUMP_SETTING && m_Jump_Page->ifClickWithCheat() ) {
-                    if ( m_Jump_Page->ifCheat() ) {
-                        for ( int i = 0 ; i < 3 ; ++i ) {
-                            m_Tools.at(i)->SetCheat( i , item_num[i] );
-                        }
-                        m_Jump_Page->GetCheatButtom()->SetImage( OFF_IMAGE );
+                if (m_Jump_Page->GetStatus() == JUMP_SETTING && m_Jump_Page->ifClickWithCheat()) {
+                    if (m_Jump_Page->ifCheat()) {
+                        m_Jump_Page->GetCheatButtom()->SetImage(OFF_IMAGE);
                         m_Jump_Page->SetCheat(false);
+                        ApplyCheatMode(m_Tools, false);
                     } else {
-                        for ( int i = 0 ; i < 3 ; ++i ) {
-                            m_Tools.at(i)->SetCheat( i , 100 );
-                        }
-                        m_Jump_Page->GetCheatButtom()->SetImage( ON_IMAGE );
+                        m_Jump_Page->GetCheatButtom()->SetImage(ON_IMAGE);
                         m_Jump_Page->SetCheat(true);
+                        ApplyCheatMode(m_Tools, true);
                     }
                 }
+
                 if ( m_Jump_Page->ifClickWithPlayButtom() ) {
                     SetUpStage( m_stage_pos );
                 }

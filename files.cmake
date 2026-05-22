@@ -1,23 +1,23 @@
 set(SRC_FILES
     App.cpp
-    AppInit.cpp
-    AppStage.cpp
+    AppSetup.cpp
+    AppGameplay.cpp
     Character.cpp
-    DebugMode.cpp
+    DebugHelpers.cpp
     GameCharacter.cpp
     Global.cpp
+    InputHandlers.cpp
     JumpPage.cpp
     main.cpp
-    PhaseMainAction.cpp
     PhaseResourceManager.cpp
     StageObject.cpp
-    StageObjectCheck.cpp
-    StageObjectDisappear.cpp
-    StageObjectInit.cpp
-    StageObjectItemUsed.cpp
-    StageObjectMakeDisappear.cpp
+    StageObjectMatch.cpp
+    StageObjectResolve.cpp
+    StageObjectSetup.cpp
+    StageObjectTools.cpp
+    StageObjectSpecials.cpp
     StageObjectShuffle.cpp
-    StageObjectUpdate.cpp
+    StageObjectProgress.cpp
     StageConfig.cpp
 )
 

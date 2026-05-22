@@ -1,14 +1,9 @@
 #include "StageObject.hpp"
 #include "App.hpp"
 #include "Global.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include <string>
 #include <random>
-#include <thread>
 #include <vector>
-#include <chrono>
 using namespace std;
 
 void StageObject::RandomChangeObject( int current_pos ) {

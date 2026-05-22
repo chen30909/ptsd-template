@@ -12,6 +12,7 @@
 #include "JumpPage.hpp"
 #include "Item.hpp"
 #include <vector>
+#include <chrono>
 
 bool PhaseInitialImage(std::shared_ptr<Character>& chara_obj);
 int PhaseHomePage(const std::vector<std::shared_ptr<Character>>& buttoms);
@@ -50,14 +51,15 @@ public:
 
         const auto lastStage = static_cast<size_t>(GetPlayableStageCount());
         for (size_t i = 1; i < m_Stage_Buttoms.size() && i <= lastStage; ++i) {
+            const auto& config = GetStageConfig(static_cast<int>(i));
             if (ifClear[i]) {
-                m_Stage_Buttoms.at(i)->SetImage(ClearStageList[i]);
+                m_Stage_Buttoms.at(i)->SetImage(config.clearButtonImage);
             }
             else if (i > 0 && ifClear[i - 1]) {
-                m_Stage_Buttoms.at(i)->SetImage(CurrentStageList[i]);
+                m_Stage_Buttoms.at(i)->SetImage(config.currentButtonImage);
             }
             else {
-                m_Stage_Buttoms.at(i)->SetImage(LevelStageList[i]);
+                m_Stage_Buttoms.at(i)->SetImage(config.stageButtonImage);
             }
             m_Stage_Buttoms.at(i)->SetVisible(true);
         }
@@ -99,7 +101,7 @@ private:
     std::shared_ptr<PhaseResourceManager> m_PRM;
 
     int m_stage_pos = 0;
-    bool m_EnterDown = false;
+    std::chrono::steady_clock::time_point m_LastFrameTime = std::chrono::steady_clock::now();
 };
 
 #endif

@@ -138,6 +138,23 @@ void StageObject::DisAppearAll() {
     this->GetStageGoalObject()->DisAppear();
 }
 
+void StageObject::UpdateAnimations(float deltaTime) {
+    for (size_t i = 1; i < m_Stage_Object.size(); ++i) {
+        if (m_Stage_Object[i]) {
+            m_Stage_Object[i]->UpdateMotion(deltaTime);
+        }
+    }
+}
+
+bool StageObject::HasActiveAnimations() const {
+    for (size_t i = 1; i < m_Stage_Object.size(); ++i) {
+        if (m_Stage_Object[i] && m_Stage_Object[i]->IsAnimating()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void StageObject::ClearAllClick() {
     for (auto& obj : m_Stage_Object) {
         if (obj) obj->SetClick(false);

@@ -64,13 +64,10 @@ public:
         this->SetZIndex( 5 );
     }
 
-    void SetCheat( int i, int num ) {
-        item_num[i] = this->GetNum();
-        this->SetNum( num );
-        m_ItemNumberShow->SetNum( this->GetNum() );
+    void SetCount(int num) {
+        this->SetNum(num);
+        m_ItemNumberShow->SetNum(this->GetNum());
         m_ItemNumberShow->UpdateInItem();
-        m_ItemNumberShow->SetZIndex( 12 );
-        this->SetZIndex( 5 );
     }
     
     void Update() {

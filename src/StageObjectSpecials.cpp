@@ -1,14 +1,8 @@
 #include "StageObject.hpp"
 #include "App.hpp"
 #include "Global.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <string>
 #include <random>
-#include <thread>
 #include <vector>
-#include <chrono>
 
 void StageObject::MakeDisappearWithObject( int current_pos ) {
     if ( m_Stage_Object[current_pos]->GetVisibility() == false ) {

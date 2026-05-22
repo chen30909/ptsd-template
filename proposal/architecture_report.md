@@ -1,6 +1,6 @@
 # LINE POP2 Architecture Report
 
-目前版本是使用 PTSD 框架完成的 Line Pop2 第一關 Demo。架構分成六層：
+目前版本是使用 PTSD 框架完成的 Line Pop2 前四關 Demo。架構分成六層：
 
 ```text
 Build Layer
@@ -94,11 +94,11 @@ struct StageConfig {
 目標圖示
 ```
 
-目前展示版本在首頁放入第 1-10 關入口，但只有第 1 關有完整棋盤資料。第 2-10 關在 `StageConfig` 中被標記為 `hasBoard = false`，點擊後會進入空地圖作為 placeholder，方便之後逐步補上關卡內容。
+目前展示版本在首頁放入第 1-10 關入口，其中第 1-4 關有完整棋盤資料。第 5-10 關在 `StageConfig` 中被標記為 `hasBoard = false`，點擊後會進入空地圖作為 placeholder，方便之後逐步補上關卡內容。
 
 ### PhaseResourceManager
 
-`PhaseResourceManager` 負責背景切換。現在新增 `NextStage(stage)`，可依照 `StageConfig` 的 `backgroundImage` 切換關卡背景；第 2-10 關目前只顯示空地圖背景。
+`PhaseResourceManager` 負責背景切換。現在新增 `NextStage(stage)`，可依照 `StageConfig` 的 `backgroundImage` 切換關卡背景；第 5-10 關目前只顯示空地圖背景。
 
 ### JumpPage
 
