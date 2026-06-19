@@ -22,6 +22,10 @@
 
 Windows 建議使用 CLion 內建的 CMake + MinGW toolchain，或 Visual Studio toolchain。第一次設定 toolchain 後，CLion 重新載入 CMake，再 Build/Run `LINEPOP2` target 即可。
 
+## 常見問題
+
+如果 CMake 顯示 `Target "LINEPOP2" links to SDL2::SDL2main but the target was not found`，代表拿到的是舊版專案或 CLion 還留著舊的 CMake cache。請確認使用新版專案，然後刪除 `cmake-build-debug` 後重新用 CLion 開啟專案。
+
 ## macOS
 
 macOS 直接用 CLion 開專案即可，等待 CMake 載入後 Build/Run `LINEPOP2` target。
