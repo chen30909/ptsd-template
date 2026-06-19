@@ -28,6 +28,30 @@ else()
     FetchContent_MakeAvailable(ptsd)
 endif()
 
+set(PTSD_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/PTSD")
+set(PTSD_PUBLIC_INCLUDE_DIRS
+    "${PTSD_ROOT}/include"
+    "${PTSD_ROOT}/lib/sdl2/include"
+    "${PTSD_ROOT}/lib/glew/include"
+    "${PTSD_ROOT}/lib/spdlog/include"
+    "${PTSD_ROOT}/lib/glm"
+    "${PTSD_ROOT}/lib/imgui"
+    "${PTSD_ROOT}/lib/imgui/backends"
+)
+
+foreach(REQUIRED_FILE
+    "${PTSD_ROOT}/include/pch.hpp"
+    "${PTSD_ROOT}/include/Util/GameObject.hpp"
+    "${PTSD_ROOT}/lib/glm/glm/vec2.hpp"
+)
+    if(NOT EXISTS "${REQUIRED_FILE}")
+        message(FATAL_ERROR
+            "Missing required project dependency file: ${REQUIRED_FILE}\n"
+            "Please re-extract the complete source package. Do not copy only src/include/Resources; the PTSD folder must be complete."
+        )
+    endif()
+endforeach()
+
 include(files.cmake)
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -53,8 +77,10 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources"
 )
 
-target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE
+    ${DEPENDENCY_INCLUDE_DIRS}
+    ${PTSD_PUBLIC_INCLUDE_DIRS}
+)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME}

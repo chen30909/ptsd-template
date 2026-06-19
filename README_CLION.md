@@ -26,6 +26,16 @@ Windows 建議使用 CLion 內建的 CMake + MinGW toolchain，或 Visual Studio
 
 如果 CMake 顯示 `Target "LINEPOP2" links to SDL2::SDL2main but the target was not found`，代表拿到的是舊版專案或 CLion 還留著舊的 CMake cache。請確認使用新版專案，然後刪除 `cmake-build-debug` 後重新用 CLion 開啟專案。
 
+如果 Build 顯示找不到 `pch.hpp`、`Util/GameObject.hpp` 或 `glm/vec2.hpp`，通常代表 `PTSD` 資料夾沒有完整解壓，或仍在使用舊的 CMake cache。請確認下面三個檔案都存在：
+
+```text
+PTSD/include/pch.hpp
+PTSD/include/Util/GameObject.hpp
+PTSD/lib/glm/glm/vec2.hpp
+```
+
+確認後刪除 `cmake-build-debug`，再重新用 CLion 開啟專案。
+
 ## macOS
 
 macOS 直接用 CLion 開專案即可，等待 CMake 載入後 Build/Run `LINEPOP2` target。
