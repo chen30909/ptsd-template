@@ -6,6 +6,8 @@ if exist build (
     cmake -DCMAKE_BUILD_TYPE=Debug -B build
 )
 echo build the project now
-cmake --build build
-echo finish compile , run ./build/Debug/2025OOPL_PROJECT.exe
+cmake --build build --target LINEPOP2
+echo finish compile
+echo If you use Visual Studio generator, run build\Debug\LINEPOP2.exe
+echo If you use MinGW/Ninja generator, run build\LINEPOP2.exe
 pause

@@ -68,6 +68,7 @@
 #define ON_IMAGE RESOURCE_DIR"/Image/GameObject/on.png"
 #define OFF_IMAGE RESOURCE_DIR"/Image/GameObject/off.png"
 #define SETTING RESOURCE_DIR"/Image/Background/setting.png"
+#define MAIN_BGM RESOURCE_DIR"/Music/line_town_aiueongaku.mp3"
 
 #define HAMMER_IMAGE RESOURCE_DIR"/Image/GameObject/item1.png"
 #define MAGIC_STICK_IMAGE RESOURCE_DIR"/Image/GameObject/item2.png"

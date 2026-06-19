@@ -49,9 +49,15 @@ void App::Update() {
                     if ( m_Jump_Page->ifBGM() ) {
                         m_Jump_Page->GetBGMButtom()->SetImage( OFF_IMAGE );
                         m_Jump_Page->SetBGM(false);
+                        if (m_BGM) {
+                            m_BGM->Pause();
+                        }
                     } else {
                         m_Jump_Page->GetBGMButtom()->SetImage( ON_IMAGE );
                         m_Jump_Page->SetBGM(true);
+                        if (m_BGM) {
+                            m_BGM->Resume();
+                        }
                     }
                 }
                 if (m_Jump_Page->GetStatus() == JUMP_SETTING && m_Jump_Page->ifClickWithCheat()) {
@@ -108,4 +114,7 @@ void App::Update() {
 
 void App::End() {
     LOG_TRACE("End");
+    if (m_BGM) {
+        m_BGM->FadeOut(300);
+    }
 }

@@ -6,22 +6,31 @@ cmake_minimum_required(VERSION 3.16)
 project(LINEPOP2)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_policy(SET CMP0135 NEW)
+
+if(APPLE)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS version" FORCE)
+endif()
 
 include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
+set(FETCHCONTENT_FULLY_DISCONNECTED ON CACHE BOOL "Use vendored dependencies without downloading" FORCE)
 
-FetchContent_Declare(
-    ptsd
-    URL         https://github.com/ntut-open-source-club/practical-tools-for-simple-design/archive/refs/tags/v0.2.zip
-    SOURCE_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/PTSD
-)
-
-FetchContent_MakeAvailable(ptsd)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/PTSD/CMakeLists.txt")
+    add_subdirectory(PTSD)
+else()
+    FetchContent_Declare(
+        ptsd
+        URL         https://github.com/ntut-open-source-club/practical-tools-for-simple-design/archive/refs/tags/v0.2.zip
+        SOURCE_DIR  ${CMAKE_CURRENT_SOURCE_DIR}/PTSD
+    )
+    FetchContent_MakeAvailable(ptsd)
+endif()
 
 include(files.cmake)
-set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 list(TRANSFORM SRC_FILES PREPEND "${SRC_DIR}/")
 list(TRANSFORM INCLUDE_FILES PREPEND "${INCLUDE_DIR}/")
 
@@ -39,18 +48,7 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources")
-else()
-    # 暫時註解掉這行，避免 CMake 停止運作
-    # message(FATAL_ERROR "Please use `-DCMAKE_BUILD_TYPE=Debug` build for now.")
-
-    # 或者給一個非 Debug 模式下的預設定義
-    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="./Resources")
-endif()
-
-# 保留安裝規則
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Resources DESTINATION .)
+target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources")
 
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)

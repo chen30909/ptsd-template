@@ -3,6 +3,7 @@
 #include "pch.hpp"
 
 #include "Util/Renderer.hpp"
+#include "Util/BGM.hpp"
 #include "PhaseResourceManager.hpp"
 #include "Character.hpp"
 #include "GameCharacter.hpp"
@@ -99,6 +100,7 @@ private:
     std::shared_ptr<TaskText> m_End_Point;
     std::shared_ptr<TaskText> m_Show_Text;
     std::shared_ptr<PhaseResourceManager> m_PRM;
+    std::shared_ptr<Util::BGM> m_BGM;
 
     int m_stage_pos = 0;
     std::chrono::steady_clock::time_point m_LastFrameTime = std::chrono::steady_clock::now();

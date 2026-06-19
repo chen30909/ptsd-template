@@ -86,5 +86,9 @@ void App::Init() {
     m_PRM = std::make_shared<PhaseResourceManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
 
+    m_BGM = std::make_shared<Util::BGM>(MAIN_BGM);
+    m_BGM->SetVolume(48);
+    m_BGM->Play();
+
     m_CurrentState = State::UPDATE;
 }
